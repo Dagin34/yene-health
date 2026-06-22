@@ -105,7 +105,7 @@
                 Featured Products
             </span>
             <a 
-                href="/products" 
+                href="/shop" 
                 class="inline-flex items-center gap-1.5 text-[0.95rem] font-semibold text-accent transition-colors duration-200 hover:text-accent/80 group"
             >
                 View All Products 
