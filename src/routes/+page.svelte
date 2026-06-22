@@ -1,4 +1,3 @@
-<!-- +page.svelte -->
 <script lang="ts">
     import AppBanner from "$lib/components/app-banner.svelte";
     import Ecosystem from "$lib/components/ecosystem.svelte";
@@ -6,6 +5,9 @@
 	import Hero from "$lib/components/hero.svelte";
 	import Navbar from "$lib/components/navbar.svelte";
     import ProductsShowcase from "$lib/components/products-showcase.svelte";
+
+    // Receive data loaded from +page.ts using Svelte 5 runes
+    let { data } = $props();
 </script>
 
 <div
@@ -17,7 +19,7 @@
 	<main class="grow flex flex-col items-center justify-start w-full">
 		<Hero />
 		<Ecosystem />
-		<ProductsShowcase />
+		<ProductsShowcase products={data.products} />
 		<AppBanner />
 	</main>
 	<Footer />

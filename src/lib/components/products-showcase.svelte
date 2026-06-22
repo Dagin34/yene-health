@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { featuredProducts } from "$lib/data/products";
     import { 
         Heart, 
         ArrowRight, 
@@ -9,11 +8,16 @@
         Package,
         ShoppingCart,
         CheckCircle2,
-        BrainCircuit 
+        BrainCircuit,
+        FileText
     } from "@lucide/svelte";
+    import type { PharmacyProduct } from "$lib/data/products";
 
-    // Slice data directly to respect the layout restriction of the landing page grid
-    const visibleProducts = featuredProducts.slice(0, 4);
+    // Receive products prop with Svelte 5 runes
+    let { products = [] }: { products: PharmacyProduct[] } = $props();
+
+    // Slice data directly to respect the layout restriction of the landing page grid (up to 4 products)
+    let visibleProducts = $derived(products.slice(0, 4));
 
     // Track favorited product status dynamically
     let favorites = $state(new Set<string>());
@@ -119,26 +123,75 @@
                 <div 
                     class="group relative flex flex-col bg-white border border-secondary/60 rounded-3xl overflow-hidden pb-6 shadow-[0_4px_20px_rgba(20,61,58,0.015)] transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] hover:-translate-y-1.5 hover:shadow-[0_20px_45px_rgba(20,61,58,0.05)] hover:border-secondary"
                 >
+                    <!-- Image container & badges -->
                     <div class="relative w-full aspect-230/190 rounded-t-3xl bg-[#F4EBE3] overflow-hidden flex items-center justify-center">
-                        {#if product.isPlaceholder || !product.imageSrc}
+                        
+                        <!-- Stock and Rx Status Badges in top-left -->
+                        <div class="absolute top-3 left-3 flex flex-col gap-1.5 items-start z-10 pointer-events-none">
+                            {#if product.isRx}
+                                <span class="bg-accent text-white px-2 py-0.5 rounded-full text-[8px] font-extrabold uppercase tracking-wider shadow-sm flex items-center gap-0.5">
+                                    <FileText size={8} strokeWidth={3} /> Rx
+                                </span>
+                            {/if}
+                            
+                            {#if product.status === 'In Stock'}
+                                <span class="bg-[#ECF7ED] text-[#2E7D32] border border-[#A5D6A7]/30 px-2 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-wider shadow-sm">
+                                    In Stock
+                                </span>
+                            {:else if product.status === 'Prescription Required'}
+                                <span class="bg-[#FFF8E1] text-[#F57F17] border border-[#FFE082]/30 px-2 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-wider shadow-sm">
+                                    Rx Required
+                                </span>
+                            {:else if product.status === 'In-Store Pickup Only'}
+                                <span class="bg-[#E8F0FE] text-[#1A73E8] border border-[#D2E3FC]/30 px-2 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-wider shadow-sm">
+                                    Pickup Only
+                                </span>
+                            {:else}
+                                <span class="bg-[#F5F5F5] text-[#616161] border border-[#E0E0E0]/30 px-2 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-wider shadow-sm">
+                                    Out of Stock
+                                </span>
+                            {/if}
+                        </div>
+
+                        <!-- Image Render / Category-based SVG Icon Fallback -->
+                        {#if !product.imageUrl}
                             <div class="text-neutral/25 transition-transform duration-500 group-hover:scale-110">
-                                {#if product.placeholderIcon === 'medical'}
-                                    <PlusSquare size={44} strokeWidth={1.2} />
-                                {:else if product.placeholderIcon === 'shield'}
-                                    <ShieldCheck size={44} strokeWidth={1.2} />
-                                {:else if product.placeholderIcon === 'baby'}
+                                {#if product.category === 'Maternal Health'}
                                     <Baby size={44} strokeWidth={1.2} />
+                                {:else if product.category === 'Sexual Health & Family Planning'}
+                                    <ShieldCheck size={44} strokeWidth={1.2} />
+                                {:else if product.category === 'Wellness & Supplements'}
+                                    <PlusSquare size={44} strokeWidth={1.2} />
                                 {:else}
                                     <Package size={44} strokeWidth={1.2} />
                                 {/if}
                             </div>
                         {:else}
                             <img 
-                                src={product.imageSrc} 
+                                src={product.imageUrl} 
                                 alt={product.title}
                                 class="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105"
                                 loading="lazy"
+                                onerror={(e) => {
+                                    // Fallback if image fails to load
+                                    const target = e.currentTarget as HTMLImageElement;
+                                    target.style.display = 'none';
+                                    const sibling = target.nextElementSibling as HTMLElement;
+                                    if (sibling) sibling.classList.remove('hidden');
+                                }}
                             />
+                            <!-- Backup icon if image load fails -->
+                            <div class="hidden text-neutral/25 transition-transform duration-500 group-hover:scale-110 absolute">
+                                {#if product.category === 'Maternal Health'}
+                                    <Baby size={44} strokeWidth={1.2} />
+                                {:else if product.category === 'Sexual Health & Family Planning'}
+                                    <ShieldCheck size={44} strokeWidth={1.2} />
+                                {:else if product.category === 'Wellness & Supplements'}
+                                    <PlusSquare size={44} strokeWidth={1.2} />
+                                {:else}
+                                    <Package size={44} strokeWidth={1.2} />
+                                {/if}
+                            </div>
                         {/if}
 
                         <button 
@@ -155,21 +208,26 @@
                         </button>
                     </div>
 
+                    <!-- Product Details and Price -->
                     <div class="flex flex-col grow p-5 pb-2 justify-between">
                         <div class="flex flex-col gap-1">
                             <span class="text-[9px] font-bold uppercase tracking-wider text-neutral/40">
                                 {product.category}
                             </span>
-                            <a href={product.href} class="focus:outline-none">
-                                <h3 class="text-[1rem] font-bold text-neutral tracking-tight transition-colors duration-200 hover:text-primary line-clamp-1">
+                            <a href={`/products/${product.id}`} class="focus:outline-none">
+                                <h3 class="text-[1rem] font-bold text-neutral tracking-tight transition-colors duration-200 hover:text-primary line-clamp-1" title={product.title}>
                                     {product.title}
                                 </h3>
                             </a>
+                            <!-- Short Description snippet -->
+                            <p class="text-[0.78rem] text-neutral/60 line-clamp-2 mt-1 leading-snug">
+                                {product.description}
+                            </p>
                         </div>
 
                         <div class="flex justify-between items-center pt-4 mt-auto">
                             <span class="text-[1rem] font-bold text-neutral/80">
-                                {product.priceETB} <span class="text-[0.7rem] font-medium text-neutral/50 ml-0.5">ETB</span>
+                                {product.price.toLocaleString()} <span class="text-[0.7rem] font-medium text-neutral/50 ml-0.5">ETB</span>
                             </span>
                             
                             <!-- Animated Cart Button with dynamic state feedback -->

@@ -1,53 +1,90 @@
 // $lib/data/products.ts
 
-export interface Product {
+/**
+ * Product category verticals found on the YeneHealth Pharmacy platform
+ */
+export type ProductCategory =
+    | 'Maternal Health'
+    | 'Sexual Health & Family Planning'
+    | 'Personal Care & Hygiene'
+    | 'Wellness & Supplements';
+
+/**
+ * Representation of a product card on the YeneHealth Pharmacy store
+ */
+export interface PharmacyProduct {
     id: string;
     title: string;
-    category: string;
-    priceETB: number;
-    imageSrc: string;
-    isPlaceholder?: boolean;
-    placeholderIcon?: 'medical' | 'shield' | 'baby' | 'default';
-    href: string;
+    description: string;
+    price: number; // Stated in Ethiopian Birr (ETB)
+    category: ProductCategory;
+    status: 'In Stock' | 'Prescription Required' | 'In-Store Pickup Only' | 'Out of Stock';
+    imageUrl: string; // Absolute CDN URL or relative asset path
+    isRx: boolean; // Prescription requirement flag (Rx vs OTC)
 }
 
-export const featuredProducts: Product[] = [
+/**
+ * Live inventory dataset scraped from the YeneHealth Pharmacy platform (https://yenehealth.com/pharmacy)
+ */
+export const featuredProducts: PharmacyProduct[] = [
     {
-        id: "yh-prod-001",
-        title: "Prenatal Multivitamins",
-        category: "Supplements",
-        priceETB: 450,
-        imageSrc: "/images/products/prenatal-multivitamins.png", // Replace with your static asset or Cloudinary link
-        href: "/products/prenatal-multivitamins"
+        id: "yh-prod-101",
+        title: "Pregnacare Plus Omega-3",
+        description: "Specially formulated prenatal multivitamins with Omega-3 DHA to support healthy maternal nutrition and fetal development.",
+        price: 1980,
+        category: "Maternal Health",
+        status: "In Stock",
+        imageUrl: "/images/products/pregnacare-plus.png",
+        isRx: false
     },
     {
-        id: "yh-prod-002",
-        title: "Gentle Cleansing Wash",
-        category: "Personal Care",
-        priceETB: 320,
-        imageSrc: "", // Empty or missing triggers the elegant UI placeholder block
-        isPlaceholder: true,
-        placeholderIcon: "medical",
-        href: "/products/gentle-cleansing-wash"
+        id: "yh-prod-102",
+        title: "Postinor-2 (Levonorgestrel)",
+        description: "Emergency oral contraceptive pill designed to prevent pregnancy when taken within 72 hours of unprotected sexual intercourse.",
+        price: 250,
+        category: "Sexual Health & Family Planning",
+        status: "In Stock",
+        imageUrl: "/images/products/postinor.png",
+        isRx: false
     },
     {
-        id: "yh-prod-003",
-        title: "Daily Probiotics",
-        category: "Wellness",
-        priceETB: 580,
-        imageSrc: "",
-        isPlaceholder: true,
-        placeholderIcon: "shield",
-        href: "/products/daily-probiotics"
+        id: "yh-prod-103",
+        title: "Amaryl 2mg (Glimepiride)",
+        description: "Prescription-only oral hypoglycemic agent used to control blood sugar levels in patients diagnosed with Type 2 Diabetes.",
+        price: 480,
+        category: "Wellness & Supplements",
+        status: "Prescription Required",
+        imageUrl: "/images/products/amaryl.png",
+        isRx: true
     },
     {
-        id: "yh-prod-004",
-        title: "Organic Cotton Swaddle",
-        category: "Mother & Baby",
-        priceETB: 850,
-        imageSrc: "",
-        isPlaceholder: true,
-        placeholderIcon: "baby",
-        href: "/products/organic-cotton-swaddle"
+        id: "yh-prod-104",
+        title: "Tampax Super Tampons",
+        description: "Premium cotton tampons with a smooth protective applicator providing reliable absorbency and security.",
+        price: 1650,
+        category: "Personal Care & Hygiene",
+        status: "In Stock",
+        imageUrl: "/images/products/tampax-super.png",
+        isRx: false
+    },
+    {
+        id: "yh-prod-105",
+        title: "Kuri Mint Lactation Tea",
+        description: "Natural organic herbal tea blend formulated with traditional ingredients to support breast milk flow and production.",
+        price: 500,
+        category: "Maternal Health",
+        status: "In Stock",
+        imageUrl: "/images/products/lactation-tea.png",
+        isRx: false
+    },
+    {
+        id: "yh-prod-106",
+        title: "Salbutol Inhaler (Albuterol)",
+        description: "Prescription bronchodilator providing rapid relief from asthma attacks, wheezing, and breathing difficulties.",
+        price: 350,
+        category: "Wellness & Supplements",
+        status: "Prescription Required",
+        imageUrl: "/images/products/salbutol-inhaler.png",
+        isRx: true
     }
 ];
