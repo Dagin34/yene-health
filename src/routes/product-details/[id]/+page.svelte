@@ -241,7 +241,7 @@
                                 {product.price.toLocaleString()}
                             </span>
                             <span class="text-[0.85rem] font-bold text-neutral/50 uppercase tracking-wider">
-                                ETB / ETR
+                                ETB
                             </span>
                         </div>
 
@@ -388,9 +388,9 @@
                             </div>
                         {:else}
                             <div class="flex flex-col gap-3 animate-fade-in">
-                                <h4 class="font-bold text-[#ba3c3d]">Warnings, Side Effects & Precautions</h4>
+                                <h4 class="font-bold text-error">Warnings, Side Effects & Precautions</h4>
                                 <p class="text-neutral/90">{details.safety}</p>
-                                <div class="mt-4 bg-[#ba3c3d]/5 border border-[#ba3c3d]/15 rounded-xl p-4 flex gap-3 text-xs text-[#ba3c3d]">
+                                <div class="mt-4 bg-error/5 border border-error/15 rounded-xl p-4 flex gap-3 text-xs text-error">
                                     <AlertCircle size={16} class="shrink-0 mt-0.5" />
                                     <span>
                                         <strong>Emergency Note:</strong> If you suspect a severe allergic reaction or overdose, stop taking the medication immediately and seek help at the nearest clinic or dial national health response numbers.
