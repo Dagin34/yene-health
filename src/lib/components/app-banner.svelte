@@ -18,6 +18,7 @@
 </script>
 
 <section
+    id="download"
     class="w-full bg-background pb-12 md:pb-16 selection:bg-accent/20"
     aria-labelledby="app-banner-heading"
 >
@@ -61,8 +62,9 @@
                     <div
                         class="flex flex-wrap justify-center md:justify-end items-center gap-4 w-full"
                     >
-                        <button
-                            type="button"
+                        <a
+                            href="https://play.google.com/store/apps/details?id=com.yenehealth.app&hl=am&gl=US"
+                            target="_blank"
                             class="flex items-center justify-center w-48 text-white bg-accent hover:-translate-y-1 transition-all ease-in duration-100 h-14 rounded-2xl"
                         >
                             <div class="mr-3">
@@ -97,11 +99,12 @@
                                     Google Play
                                 </div>
                             </div>
-                        </button>
+                        </a>
 
                         <!-- App Store Link Button -->
-                        <button
-                            type="button"
+                        <a
+                            href="https://apps.apple.com/tr/app/yenehealth/id1673152108"
+                            target="_blank"
                             class="flex items-center justify-center w-48 text-white bg-accent hover:-translate-y-1 transition-all ease-in duration-100 h-14 rounded-2xl"
                         >
                             <div class="mr-3">
@@ -121,7 +124,7 @@
                                     App Store
                                 </div>
                             </div>
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>

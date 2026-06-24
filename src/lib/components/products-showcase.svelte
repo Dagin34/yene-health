@@ -111,7 +111,8 @@
         <!-- PRODUCT GRID (YOUR EXACT STYLING) -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 xl:gap-4">
             {#each visibleProducts as product (product.id)}
-                <div 
+                <a 
+                    href={`/products/${product.id}`}
                     class="group relative flex flex-col bg-white border border-secondary/60 rounded-3xl overflow-hidden pb-6 shadow-[0_4px_20px_rgba(20,61,58,0.015)] transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] hover:-translate-y-1.5 hover:shadow-[0_20px_45px_rgba(20,61,58,0.05)] hover:border-secondary"
                 >
                     <!-- Image container & badges -->
@@ -187,7 +188,11 @@
 
                         <button 
                             type="button"
-                            onclick={() => toggleFavorite(product.id)}
+                            onclick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                toggleFavorite(product.id);
+                            }}
                             class="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-sm text-neutral/70 border border-neutral/5 transition-all duration-200 hover:bg-white hover:scale-110 active:scale-95"
                             aria-label="Add to wishlist"
                         >
@@ -205,11 +210,9 @@
                             <span class="text-[9px] font-bold uppercase tracking-wider text-neutral/40">
                                 {product.category}
                             </span>
-                            <a href={`/products/${product.id}`} class="focus:outline-none">
-                                <h3 class="text-[1rem] font-bold text-neutral tracking-tight transition-colors duration-200 hover:text-primary line-clamp-1" title={product.title}>
-                                    {product.title}
-                                </h3>
-                            </a>
+                            <h3 class="text-[1rem] font-bold text-neutral tracking-tight transition-colors duration-200 hover:text-primary line-clamp-1" title={product.title}>
+                                {product.title}
+                            </h3>
                             <!-- Short Description snippet -->
                             <p class="text-[0.78rem] text-neutral/60 line-clamp-2 mt-1 leading-snug">
                                 {product.description}
@@ -224,7 +227,11 @@
                             <!-- Animated Cart Button with dynamic state feedback -->
                             <button 
                                 type="button"
-                                onclick={() => handleAddToCart(product.id)}
+                                onclick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    handleAddToCart(product.id);
+                                }}
                                 disabled={loadingCartId === product.id}
                                 class="inline-flex items-center justify-center gap-1.5 bg-accent text-white font-semibold text-[0.85rem] px-4 py-2.5 rounded-[14px] min-w-30 transition-all duration-200 hover:bg-accent/90 hover:shadow-[0_4px_12px_rgba(168,76,59,0.2)] active:scale-95 disabled:opacity-80"
                             >
@@ -242,7 +249,7 @@
                             </button>
                         </div>
                     </div>
-                </div>
+                </a>
             {/each}
         </div>
 

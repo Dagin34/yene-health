@@ -38,7 +38,7 @@
 </script>
 
 <section
-    class="relative min-h-screen w-full overflow-hidden bg-[#FAF7F4] pb-0 pt-8 md:pt-24 flex flex-col justify-between selection:bg-accent/20"
+    class="relative min-h-screen w-full overflow-hidden bg-[#FAF7F4] pb-0 pt-8 md:pt-38 flex flex-col justify-between selection:bg-accent/20"
     aria-label="Hero Introduction"
 >
     <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
@@ -86,7 +86,8 @@
                     </a>
 
                     <a
-                        href="#learn-more"
+                        href="https://youtube.com/channel/UCFwoNjdg9crbJxh4ezvm3KQ/"
+                        target="_blank"
                         class="inline-flex items-center gap-2.5 border border-neutral/15 bg-white/40 backdrop-blur-sm hover:bg-white text-neutral/80 hover:text-primary text-[0.95rem] font-semibold px-6 py-4 rounded-full transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0"
                     >
                         <span class="w-5 h-5 rounded-full bg-neutral/5 flex items-center justify-center text-neutral/60">
@@ -96,7 +97,7 @@
                     </a>
                 </div>
 
-                <div class="w-full h-px bg-linear-to-r from-accent/15 to-transparent pt-2"></div>
+                <div class="w-full h-px bg-linear-to-r from-primary via-accent/50 to-transparent pt-2"></div>
             </div>
 
             <div class="relative flex items-center justify-center lg:justify-end lg:col-span-6 xl:col-span-7 h-full min-h-120 lg:min-h-0">

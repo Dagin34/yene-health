@@ -15,7 +15,7 @@
             title: "Period Tracking",
             description:
                 "Understand your cycle with precision and personalized health insights.",
-            href: "#period-tracking",
+            href: "/about",
             iconBg: "bg-[#FFF0ED]",
             iconColor: "text-accent",
         },
@@ -24,7 +24,7 @@
             title: "Telehealth",
             description:
                 "Connect with certified specialists from the comfort of your home.",
-            href: "#telehealth",
+            href: "/about",
             iconBg: "bg-[#E6ECEB]",
             iconColor: "text-primary",
         },
@@ -33,7 +33,7 @@
             title: "E-Pharmacy",
             description:
                 "Discreet delivery of essential wellness and medical products.",
-            href: "#e-pharmacy",
+            href: "/about",
             iconBg: "bg-[#E6ECEB]",
             iconColor: "text-primary",
         },
@@ -42,7 +42,7 @@
             title: "Education",
             description:
                 "Expert-verified content to empower your health decisions.",
-            href: "#education",
+            href: "/about",
             iconBg: "bg-neutral/5",
             iconColor: "text-neutral/75",
         },

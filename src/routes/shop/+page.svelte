@@ -101,7 +101,11 @@
         "Maternal Health",
         "Sexual Health & Family Planning",
         "Personal Care & Hygiene",
-        "Wellness & Supplements"
+        "Mommy & Baby",
+        "Medical Health",
+        "Beauty & Cosmetics",
+        "Vitamins & Supplements",
+        "Wellness & Supplements",
     ];
 
     function clearFilters() {

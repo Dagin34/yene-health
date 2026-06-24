@@ -227,7 +227,7 @@
                             <input
                                 id="reg-name"
                                 type="text"
-                                placeholder="Dagmawi Bogale"
+                                placeholder="Dagmawi Napoleon"
                                 class="w-full pl-11 pr-4 py-3 bg-neutral-50 border border-neutral-200 rounded-2xl text-sm focus:outline-none focus:border-primary/40 focus:bg-white transition-all duration-200"
                             />
                         </div>
