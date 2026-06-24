@@ -12,6 +12,7 @@
         FileText
     } from "@lucide/svelte";
     import type { PharmacyProduct } from "$lib/data/products";
+    import { learningMaterials } from "$lib/data/learningMaterials";
 
     // Receive products prop with Svelte 5 runes
     let { products = [] }: { products: PharmacyProduct[] } = $props();
@@ -53,26 +54,16 @@
     }
 
     // Static Data Layer for the Learning Showcase Row (from image_8d2122.png)
-    const articles = [
-        {
-            id: "art-1",
-            title: "Understanding Your Hormones",
-            category: "Hormones",
-            description: "A comprehensive guide to how hormonal shifts affect your mood, energy, and overall health throughout your cycle.",
-            imageSrc: "/images/blog/hormones-guide.png", 
-            hasCustomImage: true,
-            href: "/learning/understanding-your-hormones"
-        },
-        {
-            id: "art-2",
-            title: "Mindfulness for Modern Women",
-            category: "Mental Health",
-            description: "Practical tips for managing stress and finding balance in a fast-paced digital world.",
-            imageSrc: "", 
-            hasCustomImage: false,
-            href: "/learning/mindfulness-for-modern-women"
-        }
-    ];
+    // Slice two articles from learningMaterials for Featured Learning
+    const articles = learningMaterials.slice(0, 2).map((material) => ({
+        id: material.id,
+        title: material.title,
+        category: material.category,
+        description: material.shortDescription,
+        imageSrc: material.imageUrl,
+        hasCustomImage: !!material.imageUrl,
+        href: `/read/${material.slug}`
+    }));
 </script>
 
 <section 
@@ -261,7 +252,7 @@
                 Featured Learning
             </span>
             <a 
-                href="/resources" 
+                href="/learn" 
                 class="inline-flex items-center gap-1.5 text-[0.95rem] font-semibold text-primary transition-colors duration-200 hover:text-primary/80 group"
             >
                 Explore Resources 
