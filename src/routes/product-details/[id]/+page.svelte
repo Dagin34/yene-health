@@ -18,6 +18,7 @@
         Check
     } from "@lucide/svelte";
     import type { PharmacyProduct } from "$lib/data/products";
+    import Seo from "$lib/components/seo.svelte";
 
     // Receive data from +page.ts loader
     let { data } = $props();
@@ -104,8 +105,7 @@
 </script>
 
 <svelte:head>
-    <title>{product.title} - YeneHealth Pharmacy</title>
-    <meta name="description" content={product.description} />
+    <Seo title="{product.title} | YeneHealth Shop | Women's Digital Health Catalog" />
 </svelte:head>
 
 <div class="min-h-screen bg-background flex flex-col relative overflow-x-hidden selection:bg-accent/20 selection:text-primary">

@@ -17,6 +17,7 @@
         ChevronDown
     } from "@lucide/svelte";
     import type { PharmacyProduct, ProductCategory } from "$lib/data/products";
+    import Seo from "$lib/components/seo.svelte";
 
     // Receive loaded products array from loader
     let { data } = $props();
@@ -117,8 +118,7 @@
 </script>
 
 <svelte:head>
-    <title>YeneHealth Pharmacy | Women's Digital Health Catalog</title>
-    <meta name="description" content="Browse and filter trusted women's health products, prenatal vitamins, contraceptives, and wellness diagnostics on Ethiopia's leading pharmacy platform." />
+    <Seo title="Shop | YeneHealth | Women's Digital Health Catalog" />
 </svelte:head>
 
 <div class="min-h-screen bg-background flex flex-col relative overflow-x-hidden selection:bg-accent/20 selection:text-primary">

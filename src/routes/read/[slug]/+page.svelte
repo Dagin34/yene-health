@@ -15,6 +15,7 @@
         ChevronRight
     } from "@lucide/svelte";
     import type { LearningMaterial } from "$lib/data/learningMaterials";
+    import Seo from "$lib/components/seo.svelte";
 
     // Receive data loaded from page loader
     let { data } = $props();
@@ -72,8 +73,7 @@
 </script>
 
 <svelte:head>
-    <title>{material.title} | YeneHealth Learn</title>
-    <meta name="description" content={material.shortDescription} />
+    <Seo title="{material.title} | YeneHealth Learn | Women's Digital Health Catalog" />
 </svelte:head>
 
 <div class="min-h-screen bg-background flex flex-col relative overflow-x-hidden selection:bg-accent/20 selection:text-primary">

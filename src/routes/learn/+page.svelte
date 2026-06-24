@@ -13,6 +13,7 @@
         BookOpen
     } from "@lucide/svelte";
     import type { LearningMaterial, ArticleCategory } from "$lib/data/learningMaterials";
+    import Seo from "$lib/components/seo.svelte";
 
     // Receive loaded learning materials list from page loader
     let { data } = $props();
@@ -62,8 +63,7 @@
 </script>
 
 <svelte:head>
-    <title>YeneHealth Learn | Women's Educational Health Portal</title>
-    <meta name="description" content="Explore clinical guides, sexual health education, family planning advice, and maternal health articles curated by YeneHealth's medical experts." />
+    <Seo title="YeneHealth Learn | Women's Digital Health Catalog" />
 </svelte:head>
 
 <div class="min-h-screen bg-background flex flex-col relative overflow-x-hidden selection:bg-accent/20 selection:text-primary">
